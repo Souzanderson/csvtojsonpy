@@ -4,7 +4,7 @@ import json
 class CsvToJson:
     def __init__(self, location):
       self._location = location
-      self._arr = {}
+      self._arr = []
 
     def toJson(self, savelocation="req"):
         with open('%s.json' % (savelocation), 'w') as fp:
@@ -16,7 +16,9 @@ class CsvToJson:
             header = reader.__next__()
             for row in reader:
                 if(row):
-                    self._arr[row[4]] = {}
+                    # self._arr[row[4]] = {}
+                    dic = {}
                     for i in range(len(row)):
-                        self._arr[row[4]][header[i]] = row[i]
+                        dic[header[i]] = row[i]
+                    self._arr.append(dic)
         return self._arr
